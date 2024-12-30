@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import DM_Sans from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "./providers/theme-provider";
 
-const geistSans = localFont({
+const geistSans = DM_Sans({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
-const geistMono = localFont({
+const geistMono = DM_Sans({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
@@ -28,7 +29,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {" "}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
